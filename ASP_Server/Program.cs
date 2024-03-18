@@ -8,6 +8,7 @@ namespace ASP_Server
             var app = builder.Build();
 
             app.MapGet("/", () => "Hallo Welt!");
+            app.MapGet("/test", () => "Test Code!");
 
             app.Run();
         }
