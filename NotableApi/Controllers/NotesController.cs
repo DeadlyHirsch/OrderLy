@@ -6,7 +6,7 @@ using NotableApi.Services;
 namespace NotableApi.Controllers
 {
     [ApiController]
-    [Route("api/[controler]")]
+    [Route("api/[controller]")]
     public class NotesController : ControllerBase
     {
         private readonly NotesService _notesService;
@@ -36,6 +36,7 @@ namespace NotableApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Note newNote)
         {
+            newNote.CreatedAt = DateTime.Now.ToLocalTime();
             await _notesService.CreateAsync(newNote);
 
             return CreatedAtAction(nameof(Get), new { id = newNote.Id }, newNote);

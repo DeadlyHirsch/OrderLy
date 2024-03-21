@@ -1,4 +1,3 @@
-
 using NotableApi.Models;
 using NotableApi.Services;
 
