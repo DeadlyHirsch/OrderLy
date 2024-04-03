@@ -483,3 +483,5 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 NotableApi/.vs/NotableApi/v17/DocumentLayout.json
+/NotableApi/.vs/ProjectEvaluation
+/NotableApi/.vs/NotableApi/v17
