@@ -14,6 +14,8 @@ namespace NotableApi.Models
 
         public DateTime CreatedAt { get; set; }
 
+        public NoteTag[] Tags { get; set; } = null!;
+
         public string Content { get; set; } = null!;
     }
 }

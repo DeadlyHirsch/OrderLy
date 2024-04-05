@@ -14,6 +14,7 @@ namespace NotableApi
                 builder.Configuration.GetSection("NotableDatabase"));
 
             builder.Services.AddSingleton<NotesService>();
+            builder.Services.AddSingleton<TagsService>();
 
 
             builder.Services.AddControllers();
