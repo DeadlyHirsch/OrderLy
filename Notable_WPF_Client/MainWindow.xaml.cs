@@ -14,8 +14,11 @@ namespace Notable_WPF_Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var NoteWindow = new Window1();
+            var NoteWindow = new NoteWindow();
             NoteWindow.Show();
+
+            var LoginWindow = new LoginWindow();
+            LoginWindow.Show();
         }
     }
 }

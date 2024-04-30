@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Notable_WPF_Client
 {
     /// <summary>
-    /// Interaktionslogik für Window1.xaml
+    /// Interaktionslogik für LoginWindow.xaml
     /// </summary>
-    public partial class NoteWindow : Window
+    public partial class LoginWindow : Window
     {
-        public NoteWindow()
+        public LoginWindow()
         {
             InitializeComponent();
         }
