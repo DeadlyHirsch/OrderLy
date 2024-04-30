@@ -14,7 +14,7 @@ namespace NotableApi.Models
 
         public DateTime CreatedAt { get; set; }
 
-        public ObjectId[] TagIds { get; set; } = null!;
+        public string[] TagIds { get; set; } = null!;
 
         public string Content { get; set; } = null!;
     }
