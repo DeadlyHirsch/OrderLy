@@ -23,5 +23,15 @@ namespace Notable_WPF_Client
         {
             InitializeComponent();
         }
+
+        private void BTNRegister_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BTNLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
