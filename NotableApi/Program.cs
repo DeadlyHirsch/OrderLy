@@ -15,6 +15,7 @@ namespace NotableApi
 
             builder.Services.AddSingleton<NotesService>();
             builder.Services.AddSingleton<TagsService>();
+            builder.Services.AddSingleton<UserService>();
 
 
             builder.Services.AddControllers();

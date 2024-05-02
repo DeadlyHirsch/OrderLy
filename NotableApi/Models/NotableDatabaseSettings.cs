@@ -9,5 +9,7 @@
         public string NotesCollectionName { get; set; } = null!;
 
         public string TagsCollectionName { get; set; } = null!;
+
+        public string UserCollectionName { get; set; } = null!;
     }
 }
