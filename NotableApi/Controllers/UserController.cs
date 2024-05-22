@@ -38,11 +38,12 @@ namespace NotableApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(User newUser)
         {
-            using (SHA256 shaM = new SHA256Managed())
+            using (SHA256 shaM = SHA256.Create())
             {
-                var origPW = Encoding.UTF8.GetBytes(newUser.Password);
-                var hashedPW = shaM.ComputeHash(origPW);
-                string newPW = Encoding.UTF8.GetString(hashedPW);
+                var origPW = Encoding.ASCII.GetBytes(newUser.Password);
+                byte[] hashedPW = shaM.ComputeHash(origPW);
+                string newPW = Encoding.ASCII.GetString(hashedPW);
+                
                 newUser.Password = newPW;
             }
             await _userService.CreateAsync(newUser);
