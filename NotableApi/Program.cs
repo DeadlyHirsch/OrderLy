@@ -10,8 +10,7 @@ namespace NotableApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.Configure<NotableDatabaseSettings>(
-                builder.Configuration.GetSection("NotableDatabase"));
+            builder.Services.Configure<NotableDatabaseSettings>(builder.Configuration.GetSection("NotableDatabase"));
 
             builder.Services.AddSingleton<NotesService>();
             builder.Services.AddSingleton<TagsService>();
