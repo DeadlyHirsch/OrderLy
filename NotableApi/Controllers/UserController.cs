@@ -3,7 +3,6 @@ using NotableApi.Models;
 using NotableApi.Services;
 using System.Security.Cryptography;
 using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NotableApi.Controllers
 {
