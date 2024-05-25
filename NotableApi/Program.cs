@@ -1,7 +1,7 @@
-using NotableApi.Models;
-using NotableApi.Services;
+using OrderLy_API.Models;
+using OrderLy_API.Services;
 
-namespace NotableApi
+namespace OrderLy_API
 {
     public class Program
     {
@@ -10,11 +10,10 @@ namespace NotableApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.Configure<NotableDatabaseSettings>(builder.Configuration.GetSection("NotableDatabase"));
+            builder.Services.Configure<OrderLyDatabaseSettings>(builder.Configuration.GetSection("OrderLyDatabase"));
 
-            builder.Services.AddSingleton<NotesService>();
-            builder.Services.AddSingleton<TagsService>();
-            builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<OrderService>();
+            builder.Services.AddSingleton<VendorService>();
 
 
             builder.Services.AddControllers();

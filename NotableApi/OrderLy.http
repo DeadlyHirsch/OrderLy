@@ -1,0 +1,6 @@
+@OrderLyAPI_HostAddress = http://localhost:7180
+
+GET {{OrderLyAPI_HostAddress}}/api
+Accept: application/json
+
+###
