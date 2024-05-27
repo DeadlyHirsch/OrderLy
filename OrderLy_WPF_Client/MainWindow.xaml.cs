@@ -23,6 +23,8 @@ namespace OrderLy_WPF_Client
             LBLDate.FontSize = LBLDate.ActualHeight * 0.7;
             LBLRecent.FontSize = LBLRecent.ActualHeight * 0.7;
             LBLOrderLy.FontSize = LBLOrderLy.ActualHeight * 0.7;
+            CHTOrders.XAxes.ElementAt(0).NameTextSize = CHTOrders.Height * 1;
+            CHTOrders.Series.ElementAt(0);
         }
 
         private string LoadChartData()

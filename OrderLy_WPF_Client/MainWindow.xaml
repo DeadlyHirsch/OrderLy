@@ -57,7 +57,8 @@
                 <lvc:CartesianChart x:Name="CHTOrders"
                     Series="{Binding Series}"
                     XAxes="{Binding XAxes}"
-                    YAxes="{Binding YAxes}">
+                    YAxes="{Binding YAxes}"
+                    DrawMarginFrame="{Binding DrawMarginFrame}">
                 </lvc:CartesianChart>
 
             </Grid>
