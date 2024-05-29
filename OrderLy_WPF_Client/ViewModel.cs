@@ -69,7 +69,7 @@ namespace OrderLy_WPF_Client
 
             for (int i = 0; i < values.Length; i++)
             {
-                values[i] = 0.0;
+                values[i] = Math.Round(rand.NextDouble()*5);
             }
             values[21] = 5.0;
             return values;
