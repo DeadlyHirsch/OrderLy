@@ -10,7 +10,7 @@
         SizeChanged="MainWindow_SizeChanged" Icon="/Icon.png">
     <Window.DataContext>
         <local:ViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>                                                                                                                                       
     <Grid Background="#212121">
         <Border BorderThickness="2" BorderBrush="#323232"/>
         <Grid x:Name="GRD_Background">
@@ -48,6 +48,9 @@
             <Label x:Name="LBLDate" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Content="01.01.2024, Montag" Padding="0" Foreground="#FF14FFEB" FontSize="24" FontWeight="DemiBold"/>
             <Label x:Name="LBLRecent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Content="Recent Orders:" Padding="0" Foreground="#FF14FFEB" FontSize="20" FontWeight="DemiBold"/>
             <Label x:Name="LBLOrderLy" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Content="OrderLy v0.1" Padding="0" Foreground="#FF14FFEB" FontSize="20" FontWeight="DemiBold"/>
+
+            <ListView x:Name="LVOrders" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+
             <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
