@@ -1,10 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Windows;
-using System.Text.Json;
 using RestSharp;
+using System.Net.Http;
+using System.Text.Json;
+using System.Windows;
 
 namespace OrderLy_WPF_Client
 {
@@ -16,12 +15,16 @@ namespace OrderLy_WPF_Client
         public MainWindow()
         {
             InitializeComponent();
+            SetDefaultValues();
+        }
+        public void SetDefaultValues()
+        {
             string CurrentDate = DateTime.Now.ToString().Split(' ')[0];
             string WeekDay = DateTime.Now.DayOfWeek.ToString();
             LBLDate.Content = $"{CurrentDate}, {WeekDay}";
-            LoadChartData();
-            List<Order> recent = LoadAllOrders().Result;
-            //MessageBox.Show(recent.ToString());
+            string tmp = LoadChartData();
+            MessageBox.Show(tmp);
+            List<Order> recent = LoadAllOrders();
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -30,23 +33,22 @@ namespace OrderLy_WPF_Client
             LBLRecent.FontSize = LBLRecent.ActualHeight * 0.7;
             LBLOrderLy.FontSize = LBLOrderLy.ActualHeight * 0.7;
             CHTOrders.XAxes.ElementAt(0).NameTextSize = CHTOrders.Height * 1;
-            CHTOrders.Series.ElementAt(0);
+            //CHTOrders.Series.ElementAt(0).Values;
         }
 
-        private async Task<List<Order>> LoadAllOrders()
+        private List<Order> LoadAllOrders()
         {
             MessageBox.Show("Test");
-            
+
             List<Order> orders = new List<Order>();
 
             try
             {
                 var client = new RestClient("https://localhost:7180/api");
                 var request = new RestRequest("/Order");
-                var response = await client.ExecuteGetAsync(request);
+                var response = client.Execute(request, Method.Get);
 
                 orders = JsonSerializer.Deserialize<List<Order>>(response.Content!)!;
-                MessageBox.Show(orders.ToString());
             }
             catch (HttpRequestException e)
             {

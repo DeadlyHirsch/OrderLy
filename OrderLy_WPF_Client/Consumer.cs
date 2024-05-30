@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace OrderLy_WPF_Client
 {
     class Consumer
     {
-        [JsonPropertyName("Name")]
-        public string Name { get; set; } = null!;
-        [JsonPropertyName("FoodItems")]
-        public FoodItem[] FoodItems { get; set; } = null!;
-        [JsonPropertyName("MoneyOwed")]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("foodItems")]
+        public FoodItem[] FoodItems { get; set; }
+        [JsonPropertyName("moneyOwed")]
         public double MoneyOwed { get; set; }
-        [JsonPropertyName("MoneyReturn")]
-        public double MoneyReturn { get; set; } 
+        [JsonPropertyName("moneyReturn")]
+        public double MoneyReturn { get; set; }
     }
 }

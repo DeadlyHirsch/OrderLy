@@ -1,5 +1,4 @@
 ﻿using LiveChartsCore;
-using LiveChartsCore.Drawing;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.Painting.Effects;
@@ -18,7 +17,7 @@ namespace OrderLy_WPF_Client
                     Fill = new SolidColorPaint(new SKColor(13,115,119)) {StrokeThickness = 5},
                     Stroke = new SolidColorPaint(new SKColor(20,255,235)),
                     GeometryStroke = new SolidColorPaint(new SKColor(20,255,235)),
-                    LineSmoothness = 0.5,
+                    LineSmoothness = 0.25,
                     EasingFunction = EasingFunctions.EaseIn,
                     GeometrySize = 3
                 }
@@ -59,7 +58,7 @@ namespace OrderLy_WPF_Client
             };
         public DrawMarginFrame DrawMarginFrame => new DrawMarginFrame
         {
-            Fill = new SolidColorPaint(new SKColor(50,50,50))
+            Fill = new SolidColorPaint(new SKColor(50, 50, 50))
         };
 
         private static double[] GenerateRandomValues()
@@ -69,9 +68,8 @@ namespace OrderLy_WPF_Client
 
             for (int i = 0; i < values.Length; i++)
             {
-                values[i] = Math.Round(rand.NextDouble()*5);
+                values[i] = Math.Round(rand.NextDouble() * 5);
             }
-            values[21] = 5.0;
             return values;
         }
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace OrderLy_WPF_Client
 {
@@ -16,8 +11,8 @@ namespace OrderLy_WPF_Client
         [JsonPropertyName("cost")]
         public double Cost { get; set; }
         [JsonPropertyName("vendor")]
-        public Vendor Vendor { get; set; } = null!;
+        public Vendor Vendor { get; set; }
         [JsonPropertyName("consumers")]
-        public Consumer[] Consumers { get; set; } = null!;
+        public Consumer[] Consumers { get; set; }
     }
 }
