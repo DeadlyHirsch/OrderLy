@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,29 +17,37 @@ using static MongoDB.Driver.WriteConcern;
 namespace OrderLy_WPF_Client
 {
     /// <summary>
-    /// Interaktionslogik für ProductDialog.xaml
+    /// Interaktionslogik für NewOrder.xaml
     /// </summary>
-    public partial class ProductDialog : Window
+    public partial class OrderDialog : Window
     {
-        public FoodItem Item { get; set; } = new();
-        public ProductDialog()
+        public Order Order = new();
+        public OrderDialog()
         {
             InitializeComponent();
+            Order.Consumers = [];
         }
+
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(TBCost.Text,new NumberFormatInfo() {NumberDecimalSeparator="." }, out double d) && !Double.IsNaN(d) && !Double.IsInfinity(d))
+            if (Order is not null && Order.Consumers.Count > 0)
             {
-                if (TBName.Text != string.Empty)
-                {
-                    Item = new FoodItem() { Name = TBName.Text, Price = d };
-                    DialogResult = true;
-                }
+                Order.Vendor = new Vendor() { Name = TBVendor.Text };
+                DialogResult = true;
             }
             else
             {
-                Item = null!;
                 DialogResult = false;
+            }
+
+        }
+
+        private void BTNConsumer_Click(object sender, RoutedEventArgs e)
+        {
+            ConsumerDialog dialog = new ConsumerDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                Order.Consumers.Add(dialog.Consumer);
             }
         }
     }

@@ -181,10 +181,30 @@ namespace OrderLy_WPF_Client
             }
         }
 
-        private void BTNAddOrder_Click(object sender, RoutedEventArgs e)
+        private async void BTNAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            NewOrder newOrderWindow = new NewOrder();
-            newOrderWindow.ShowDialog();
+            OrderDialog dialog = new OrderDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                await PostNewOrderAsync(dialog.Order);
+            }
+        }
+        private async Task<bool> PostNewOrderAsync(Order order)
+        {
+            try
+            {
+                var client = new RestClient("https://localhost:7180/api");
+                var request = new RestRequest("/Order", Method.Post);
+                var JsonString = JsonSerializer.Serialize<Order>(order);
+                request.AddParameter("application/json",JsonString,ParameterType.RequestBody);
+                var response = await client.ExecuteAsync(request);
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Request error: {ex.Message}");
+                return false;
+            }
         }
     }
 }

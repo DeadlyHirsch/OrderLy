@@ -19,25 +19,25 @@ namespace OrderLy_WPF_Client
     /// </summary>
     public partial class ConsumerDialog : Window
     {
-        public string Name { get; private set; }
-        public List<FoodItem> FoodItems { get; private set; } = new();
+        public Consumer Consumer { get; set; } = new();
         public ConsumerDialog()
         {
             InitializeComponent();
+            Consumer.FoodItems = [];
         }
         
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            Name = TBName.Text;
+            Consumer.Name = TBName.Text;
             DialogResult = true;
         }
 
-        private void TBProduct_Click(object sender, RoutedEventArgs e)
+        private void BTNProduct_Click(object sender, RoutedEventArgs e)
         {
-            ProductDialog productDialog = new();
-            if (productDialog.ShowDialog() == true)
+            ProductDialog dialog = new();
+            if (dialog.ShowDialog() == true)
             {
-                FoodItems.Add(productDialog.Item);
+                Consumer.FoodItems.Add(dialog.Item);
             }
         }
     }

@@ -13,7 +13,8 @@ namespace OrderLy_WPF_Client
         [JsonPropertyName("vendor")]
         public Vendor Vendor { get; set; }
         [JsonPropertyName("consumers")]
-        public Consumer[] Consumers { get; set; }
-        public int ConsumerCount => Consumers.Length;
+        public List<Consumer> Consumers { get; set; }
+        [JsonIgnore]
+        public int ConsumerCount => Consumers.Count;
     }
 }

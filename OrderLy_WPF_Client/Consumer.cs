@@ -7,7 +7,7 @@ namespace OrderLy_WPF_Client
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("foodItems")]
-        public FoodItem[] FoodItems { get; set; }
+        public List<FoodItem> FoodItems { get; set; }
         [JsonPropertyName("moneyOwed")]
         public double MoneyOwed { get; set; }
         [JsonPropertyName("moneyReturn")]
