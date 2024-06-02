@@ -9,12 +9,12 @@ namespace OrderLy_API.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
         [BsonElement("createdAt")]
-        public DateTime? CreatedAt { get; set; } = DateTime.Now.ToLocalTime();
+        public DateTime? CreatedAt { get; set; }
         [BsonElement("cost")]
-        public double? Cost { get; set; } = 0.0;
+        public double? Cost { get; set; }
         [BsonElement("vendor")]
-        public Vendor Vendor { get; set; } = null!;
+        public Vendor Vendor { get; set; }
         [BsonElement("consumers")]
-        public Consumer[] Consumers { get; set; } = null!;
+        public Consumer[] Consumers { get; set; }
     }
 }

@@ -15,15 +15,23 @@ namespace OrderLy_API
             builder.Services.AddSingleton<OrderService>();
             builder.Services.AddSingleton<VendorService>();
 
+            var specificOrigins = "AppOrigins";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: specificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://localhost:63342");
+                          });
+            });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -32,8 +40,9 @@ namespace OrderLy_API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors(specificOrigins);
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

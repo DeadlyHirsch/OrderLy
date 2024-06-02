@@ -103,5 +103,26 @@ namespace OrderLy_API.Controllers
             var orders = await _orderService.GetWeeklyAsync();
             return orders;
         }
+
+        [HttpGet("/api/Order/MaxCostOrder")]
+        public async Task<ActionResult<Order>> GetMaxCostOrderAsync()
+        {
+            var order = await _orderService.GetMaxCostOrderAsync();
+            if (order is not null)
+            {
+                return order;
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("/api/Order/OverallCost")]
+        public async Task<double> GetOverallCostAsync()
+        {
+            double costs = await _orderService.GetOverallCost();
+            return costs;
+        }
     }
 }

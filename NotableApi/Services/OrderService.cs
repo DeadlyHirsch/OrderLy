@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using OrderLy_API.Models;
 using System.Text.Json;
@@ -61,6 +62,46 @@ namespace OrderLy_API.Services
                 .ToListAsync();
             string s = Result.ToJson();
             return JsonSerializer.Deserialize<List<Week>>(s)!;
+        }
+
+        public async Task<Order?> GetMaxCostOrderAsync()
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("OrderLy");
+            var collection = db.GetCollection<BsonDocument>("Orders");
+
+            var result = await collection.Aggregate()
+                .Sort(new BsonDocument { { "cost", -1 } })
+                .Limit(1)
+                .FirstOrDefaultAsync();
+
+            if (result == null)
+            {
+                return null;
+            }
+            
+            return BsonSerializer.Deserialize<Order> (result);
+        }
+
+        public async Task<double> GetOverallCost()
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("OrderLy");
+            var collection = db.GetCollection<BsonDocument>("Orders");
+
+            var result = await collection.Aggregate()
+                .Group(new BsonDocument {
+                    { "_id", BsonNull.Value },
+                    { "totalCost", new BsonDocument{ { "$sum", "$cost" } } }
+                })
+                .FirstOrDefaultAsync();
+
+            if (result == null)
+            {
+                return 0.0;
+            }
+
+            return result["totalCost"].ToDouble();
         }
     }
 }
