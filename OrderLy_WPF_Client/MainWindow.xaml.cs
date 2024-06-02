@@ -1,8 +1,6 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using RestSharp;
 using SkiaSharp;
 using System.Collections.ObjectModel;
@@ -12,7 +10,6 @@ using System.Windows;
 using LiveChartsCore.SkiaSharpView.Painting.Effects;
 using System.Windows.Threading;
 using System.Windows.Media;
-using System.Windows.Documents;
 
 namespace OrderLy_WPF_Client
 {
@@ -188,6 +185,7 @@ namespace OrderLy_WPF_Client
             {
                 await PostNewOrderAsync(dialog.Order);
             }
+            DataContext = this;
         }
         private async Task<bool> PostNewOrderAsync(Order order)
         {

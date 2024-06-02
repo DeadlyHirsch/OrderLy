@@ -23,8 +23,13 @@
             <TextBlock Text="Cost:" Grid.Row="1" Margin="10"/>
             <TextBox x:Name="TBCost" Grid.Row="1" Grid.Column="1" Margin="10" IsEnabled="False"/>
             <Button x:Name="BTNConsumer" Grid.Row="2" Grid.Column="0" Content="Add Consumer" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" Margin="10" Click="BTNConsumer_Click"/>
-            <ListView x:Name="LVConsumers" ItemsSource="{Binding Consumers}">
-                
+            <ListView x:Name="LVConsumers" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding Consumers}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="FoodItems" DisplayMemberBinding="{Binding FoodItems}"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
             <Button Content="OK" Grid.Row="3" Grid.Column="1" Margin="10" HorizontalAlignment="Right" Click="Ok_Click"/>
         </Grid>

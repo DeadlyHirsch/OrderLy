@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static MongoDB.Driver.WriteConcern;
 
 namespace OrderLy_WPF_Client
 {
@@ -21,11 +20,13 @@ namespace OrderLy_WPF_Client
     /// </summary>
     public partial class OrderDialog : Window
     {
+        public ObservableCollection<Consumer> Consumers { get; set; } = [];
         public Order Order = new();
         public OrderDialog()
         {
             InitializeComponent();
             Order.Consumers = [];
+            DataContext = this;
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
@@ -39,7 +40,6 @@ namespace OrderLy_WPF_Client
             {
                 DialogResult = false;
             }
-
         }
 
         private void BTNConsumer_Click(object sender, RoutedEventArgs e)
@@ -48,6 +48,7 @@ namespace OrderLy_WPF_Client
             if (dialog.ShowDialog() == true)
             {
                 Order.Consumers.Add(dialog.Consumer);
+                Consumers.Add(dialog.Consumer);
             }
         }
     }
