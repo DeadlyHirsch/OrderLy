@@ -20,10 +20,10 @@ namespace OrderLy_API
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(name: specificOrigins,
-                          policy =>
-                          {
-                              policy.WithOrigins("http://localhost:63342");
-                          });
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:63342");
+                    });
             });
 
             builder.Services.AddControllers();
