@@ -2,7 +2,7 @@
 
 namespace OrderLy_WPF_Client
 {
-    class Vendor
+    public class Vendor
     {
         [JsonPropertyName("id")]
         public string ID { get; set; }

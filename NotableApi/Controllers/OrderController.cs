@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using OrderLy_API.Models;
 using OrderLy_API.Services;
 
@@ -94,6 +95,13 @@ namespace OrderLy_API.Controllers
         {
             var count = await _orderService.GetAsync();
             return count.Count;
+        }
+
+        [HttpGet("/api/Order/Weekly")]
+        public async Task<List<Week>> GetWeeklyOrdersAsync()
+        {
+            var orders = await _orderService.GetWeeklyAsync();
+            return orders;
         }
     }
 }

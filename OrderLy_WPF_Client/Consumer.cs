@@ -2,7 +2,7 @@
 
 namespace OrderLy_WPF_Client
 {
-    class Consumer
+    public class Consumer
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }

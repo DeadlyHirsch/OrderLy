@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using OrderLy_API.Models;
+using System.Text.Json;
 
 namespace OrderLy_API.Services
 {
@@ -34,5 +36,31 @@ namespace OrderLy_API.Services
 
         public async Task RemoveAsync(string id) =>
             await _orderCollection.DeleteOneAsync(x => x.Id == id);
+
+        public async Task<List<Week>> GetWeeklyAsync()
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("OrderLy");
+            var collection = db.GetCollection<BsonDocument>("Orders");
+
+            var Result = await collection.Aggregate()
+                .Match(new BsonDocument { { "createdAt",
+                new BsonDocument("$gte", DateTime.Now.AddDays(-365)) } })
+                .Group(new BsonDocument{
+                    { "_id",
+                        new BsonDocument("$dateToString",
+                        new BsonDocument
+                        {
+                            { "format", "%V" },
+                            { "date", "$createdAt" }
+                        })
+                    },
+                { "count",
+                    new BsonDocument("$sum", 1) }
+                })
+                .ToListAsync();
+            string s = Result.ToJson();
+            return JsonSerializer.Deserialize<List<Week>>(s)!;
+        }
     }
 }

@@ -8,9 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinHeight="422" MinWidth="788"
         SizeChanged="MainWindow_SizeChanged" Icon="/Icon.png">
-    <Window.DataContext>
-        <local:ViewModel/>
-    </Window.DataContext>
     <Grid Background="#212121">
         <Border BorderThickness="2" BorderBrush="#323232"/>
         <Grid x:Name="GRD_Background">
@@ -22,47 +19,81 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="12.5*"/>
-                <RowDefinition Height="82.5*"/>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="22.5*"/>
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Grid.Column="0" BorderThickness="5" BorderBrush="#323232" CornerRadius="8"/>
-            <Border Grid.Row="0" Grid.Column="1" BorderThickness="5" BorderBrush="#323232" CornerRadius="8"/>
-            <Border Grid.Row="0" Grid.Column="2" BorderThickness="5" BorderBrush="#323232" CornerRadius="8"/>
+            <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="5" BorderBrush="#323232" CornerRadius="8"/>
 
             <Border Grid.Row="1" Grid.Column="0" BorderThickness="4" BorderBrush="#323232" CornerRadius="5"/>
             <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="4" BorderBrush="#323232" CornerRadius="5"/>
 
-            <Border Grid.Row="2" Grid.Column="0" BorderThickness="3" BorderBrush="#323232" CornerRadius="5"/>
-            <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="3" BorderBrush="#323232" CornerRadius="5"/>
+            <Border Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" BorderThickness="3" BorderBrush="#323232" CornerRadius="5"/>
+            <Border Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" BorderThickness="3" BorderBrush="#323232" CornerRadius="5"/>
 
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="4" BorderBrush="#323232"/>
             <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="2" BorderBrush="#323232"/>
-            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="2" BorderBrush="#323232"/>
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BorderThickness="2" BorderBrush="#323232"/>
 
-            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" BorderThickness="2" BorderBrush="#323232"/>
-            <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="#323232"/>
+            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" BorderThickness="2" BorderBrush="#323232"/>
+            <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="#323232"/>
 
-            <Border Grid.Row="0" Grid.Column="1" BorderThickness="4" BorderBrush="#323232"/>
-            <Border Grid.Row="0" Grid.Column="2" BorderThickness="4" BorderBrush="#323232"/>
+            <Button x:Name="BTNAddOrder" IsDefault="True" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="New Order" Foreground="#FF14FFEB" Background="#0D7377" FontSize="20" FontWeight="DemiBold" BorderBrush="#323232" BorderThickness="5" Margin="0" Click="BTNAddOrder_Click"/>
 
             <Label x:Name="LBLDate" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Content="01.01.2024, Montag" Padding="0" Foreground="#FF14FFEB" FontSize="24" FontWeight="DemiBold"/>
             <Label x:Name="LBLRecent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Content="Recent Orders:" Padding="0" Foreground="#FF14FFEB" FontSize="20" FontWeight="DemiBold"/>
-            <Label x:Name="LBLOrderLy" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Content="OrderLy v0.1" Padding="0" Foreground="#FF14FFEB" FontSize="20" FontWeight="DemiBold"/>
+            <Label x:Name="LBLAPIConnection" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Content="Initializing API connection" Padding="0" Foreground="#FFFF00FF" FontSize="20"/>
+            <Label x:Name="LBLOrderLy" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="10" Content="OrderLy v1" Padding="0,0,10,0" Foreground="#FF14FFEB" FontSize="20" FontWeight="DemiBold"/>
 
-            <ListView x:Name="LVOrders" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+            <ListView x:Name="LVOrders" ItemsSource="{Binding Orders}" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="10" Background="#FF323232" BorderBrush="#00FFFFFF" Foreground="#FF14FFEB">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="BorderBrush" Value="#212121" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="GVCDate" Header="Date" DisplayMemberBinding="{Binding CreatedAt}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="GVCVendor" Header="Vendor" DisplayMemberBinding="{Binding Vendor.Name}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="GVCCost" Header="Cost" DisplayMemberBinding="{Binding Cost}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="GVCConsumers" Header="Consumers" DisplayMemberBinding="{Binding ConsumerCount}">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
-            <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+
+                <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40*"/>
                     <RowDefinition Height="60*"/>
                 </Grid.RowDefinitions>
-                <lvc:CartesianChart x:Name="CHTOrders"
-                    Series="{Binding Series}"
-                    XAxes="{Binding XAxes}"
-                    YAxes="{Binding YAxes}"
-                    DrawMarginFrame="{Binding DrawMarginFrame}">
-                </lvc:CartesianChart>
-
+                <lvc:CartesianChart x:Name="CHTOrders"/>
             </Grid>
         </Grid>
     </Grid>
