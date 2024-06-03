@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrderLy_WPF_Client"
         mc:Ignorable="d"
-        Title="New Order" Height="450" Width="400">
-    <Grid>
+        Title="New Order" Height="450" Width="400"
+        ResizeMode="NoResize">
+    <Grid Background="#212121">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
@@ -18,20 +19,20 @@
                 <RowDefinition Height="70*"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Vendor:" Grid.Row="0" Margin="10"/>
-            <TextBox x:Name="TBVendor" Grid.Row="0" Grid.Column="1" Margin="10"/>
-            <TextBlock Text="Cost:" Grid.Row="1" Margin="10"/>
-            <TextBox x:Name="TBCost" Grid.Row="1" Grid.Column="1" Margin="10" IsEnabled="False"/>
-            <Button x:Name="BTNConsumer" Grid.Row="2" Grid.Column="0" Content="Add Consumer" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" Margin="10" Click="BTNConsumer_Click"/>
-            <ListView x:Name="LVConsumers" Grid.Row="2" Grid.Column="1" Margin="10" ItemsSource="{Binding Consumers}">
+            <TextBlock Text="Vendor:" Grid.Row="0" Margin="10" Foreground="#14FFEB"/>
+            <TextBox x:Name="TBVendor" Grid.Row="0" Grid.Column="1" Margin="10" Background="#323232"/>
+            <TextBlock Text="Cost:" Grid.Row="1" Margin="10" Foreground="#14FFEB"/>
+            <TextBox x:Name="TBCost" Grid.Row="1" Grid.Column="1" Margin="10" IsEnabled="False" Background="#323232"/>
+            <Button x:Name="BTNConsumer" Grid.Row="2" Grid.Column="0" Content="Add Consumer" Foreground="#14FFEB" Background="#323232" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" Margin="10" Click="BTNConsumer_Click"/>
+            <ListView x:Name="LVConsumers" Grid.Row="2" Grid.Column="1" Margin="10" Foreground="#14FFEB" Background="#323232" ItemsSource="{Binding Consumers}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="FoodItems" DisplayMemberBinding="{Binding FoodItems}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="90"/>
+                        <GridViewColumn Header="FoodItems" DisplayMemberBinding="{Binding FoodItems}" Width="90"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="OK" Grid.Row="3" Grid.Column="1" Margin="10" HorizontalAlignment="Right" Click="Ok_Click"/>
+            <Button Content="OK" Grid.Row="3" Grid.Column="1" Foreground="#14FFEB" Background="#323232" Margin="10" HorizontalAlignment="Right" Click="Ok_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -40,14 +40,10 @@ namespace OrderLy_API.Services
 
         public async Task<List<Week>> GetWeeklyAsync()
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var db = client.GetDatabase("OrderLy");
-            var collection = db.GetCollection<BsonDocument>("Orders");
-
-            var Result = await collection.Aggregate()
-                .Match(new BsonDocument { { "createdAt",
+            var Result = await _orderCollection.Aggregate()
+            .Match(new BsonDocument { { "createdAt",
                 new BsonDocument("$gte", DateTime.Now.AddDays(-365)) } })
-                .Group(new BsonDocument{
+            .Group(new BsonDocument{
                     { "_id",
                         new BsonDocument("$dateToString",
                         new BsonDocument
@@ -58,8 +54,8 @@ namespace OrderLy_API.Services
                     },
                 { "count",
                     new BsonDocument("$sum", 1) }
-                })
-                .ToListAsync();
+            })
+            .ToListAsync();
             string s = Result.ToJson();
             return JsonSerializer.Deserialize<List<Week>>(s)!;
         }
@@ -79,22 +75,18 @@ namespace OrderLy_API.Services
             {
                 return null;
             }
-            
-            return BsonSerializer.Deserialize<Order> (result);
+
+            return BsonSerializer.Deserialize<Order>(result);
         }
 
         public async Task<double> GetOverallCost()
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var db = client.GetDatabase("OrderLy");
-            var collection = db.GetCollection<BsonDocument>("Orders");
-
-            var result = await collection.Aggregate()
-                .Group(new BsonDocument {
+            var result = await _orderCollection.Aggregate()
+               .Group(new BsonDocument {
                     { "_id", BsonNull.Value },
                     { "totalCost", new BsonDocument{ { "$sum", "$cost" } } }
-                })
-                .FirstOrDefaultAsync();
+               })
+               .FirstOrDefaultAsync();
 
             if (result == null)
             {
